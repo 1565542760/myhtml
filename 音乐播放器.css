@@ -1,0 +1,15 @@
+.player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  button {
+    margin: 10px;
+  }
+  
+  input[type=range] {
+    width: 200px;
+  }
+  

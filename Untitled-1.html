@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>交互式哈士奇小狗</title>
+</head>
+<body>
+    <canvas id="dog-canvas" width="400" height="400"></canvas>
+    <p id="message">点击小狗试试看！</p>
+
+    <script>
+        var canvas = document.querySelector('#dog-canvas');
+        var ctx = canvas.getContext('2d');
+        var message = document.querySelector('#message');
+        
+        // 绘制哈士奇小狗
+        function drawDog(x, y) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制身体
+            ctx.fillStyle = '#c0c0c0';
+            ctx.fillRect(x - 50, y - 60, 100, 120);
+            
+            // 绘制头部
+            ctx.fillStyle = '#808080';
+            ctx.beginPath();
+            ctx.arc(x, y - 80, 50, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // 绘制眼睛
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(x - 15, y - 100, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + 15, y - 100, 10, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // 绘制嘴巴
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(x, y - 70, 20, 0, Math.PI);
+            ctx.stroke();
+            
+            // 绘制鼻子
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.arc(x, y - 85, 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        canvas.addEventListener('click', function(e) {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = e.clientX - rect.left;
+            var mouseY = e.clientY - rect.top;
+            
+            message.textContent = '你点击了小狗！';
+            drawDog(mouseX, mouseY);
+            
+            canvas.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(function() {
+                canvas.style.animation = '';
+            }, 500);
+        });
+    </script>
+    
+    <style>
+        #dog-canvas {
+            border: 1px solid black;
+        }
+        
+        #message {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: blue;
+        }
+        
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(5px); }
+            75% { transform: translateX(-5px) translateY(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</body>
+</html>
